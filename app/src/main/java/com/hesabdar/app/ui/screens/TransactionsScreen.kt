@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import com.hesabdar.app.ui.components.EmptyState
 import com.hesabdar.app.ui.components.TransactionRow
 
-private data class DemoTx(
+private data class TxListDemo(
     val title: String,
     val subtitle: String,
     val amount: Long,
@@ -41,13 +41,13 @@ private data class DemoTx(
 )
 
 private val allDemo = listOf(
-    DemoTx("حقوق ماهانه", "درآمد · ۱ شهریور", 85_000_0000, "income"),
-    DemoTx("اجاره خانه", "مسکن · ۱ شهریور", 25_000_0000, "expense"),
-    DemoTx("خرید سوپرمارکت", "خوراک · ۵ شهریور", 2_450_0000, "expense"),
-    DemoTx("فروش لپ‌تاپ", "فروش · ۸ شهریور", 18_000_0000, "income"),
-    DemoTx("بنزین", "حمل‌ونقل · ۱۰ شهریور", 1_200_0000, "expense"),
-    DemoTx("انتقال به پس‌انداز", "نقد → بانک · ۱۲ شهریور", 10_000_0000, "transfer"),
-    DemoTx("قبض برق", "قبوض · ۱۵ شهریور", 890_0000, "expense")
+    TxListDemo("حقوق ماهانه", "درآمد · ۱ شهریور", 85_000_0000, "income"),
+    TxListDemo("اجاره خانه", "مسکن · ۱ شهریور", 25_000_0000, "expense"),
+    TxListDemo("خرید سوپرمارکت", "خوراک · ۵ شهریور", 2_450_0000, "expense"),
+    TxListDemo("فروش لپ‌تاپ", "فروش · ۸ شهریور", 18_000_0000, "income"),
+    TxListDemo("بنزین", "حمل‌ونقل · ۱۰ شهریور", 1_200_0000, "expense"),
+    TxListDemo("انتقال به پس‌انداز", "نقد → بانک · ۱۲ شهریور", 10_000_0000, "transfer"),
+    TxListDemo("قبض برق", "قبوض · ۱۵ شهریور", 890_0000, "expense")
 )
 
 @OptIn(ExperimentalMaterial3Api::class)

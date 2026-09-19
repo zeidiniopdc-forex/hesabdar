@@ -28,7 +28,7 @@ import com.hesabdar.app.ui.components.SectionHeader
 import com.hesabdar.app.ui.components.TransactionRow
 
 /** داده نمایشی برای نمای کلی UI — بعداً به Room وصل می‌شود */
-private data class DemoTx(
+private data class HomeDemoTx(
     val title: String,
     val subtitle: String,
     val amount: Long,
@@ -36,10 +36,10 @@ private data class DemoTx(
 )
 
 private val demoTransactions = listOf(
-    DemoTx("حقوق ماهانه", "درآمد · امروز", 85_000_0000, "income"),
-    DemoTx("خرید سوپرمارکت", "خوراک · دیروز", 2_450_0000, "expense"),
-    DemoTx("بنزین", "حمل‌ونقل · ۲ روز پیش", 1_200_0000, "expense"),
-    DemoTx("انتقال به پس‌انداز", "نقد → بانک · ۳ روز پیش", 10_000_0000, "transfer")
+    HomeDemoTx("حقوق ماهانه", "درآمد · امروز", 85_000_0000, "income"),
+    HomeDemoTx("خرید سوپرمارکت", "خوراک · دیروز", 2_450_0000, "expense"),
+    HomeDemoTx("بنزین", "حمل‌ونقل · ۲ روز پیش", 1_200_0000, "expense"),
+    HomeDemoTx("انتقال به پس‌انداز", "نقد → بانک · ۳ روز پیش", 10_000_0000, "transfer")
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
