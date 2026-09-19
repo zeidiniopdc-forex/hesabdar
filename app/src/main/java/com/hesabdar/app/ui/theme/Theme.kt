@@ -8,29 +8,51 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
-private val Primary = Color(0xFF1565C0)
-private val Secondary = Color(0xFF00897B)
-private val Tertiary = Color(0xFF2E7D32)
-
 private val LightColors = lightColorScheme(
-    primary = Primary,
-    secondary = Secondary,
-    tertiary = Tertiary
+    primary = HesabdarBlue,
+    onPrimary = CardLight,
+    primaryContainer = ColorSoftPrimary,
+    onPrimaryContainer = HesabdarBlue,
+    secondary = HesabdarTeal,
+    onSecondary = CardLight,
+    tertiary = IncomeGreen,
+    error = ExpenseRed,
+    background = SurfaceLight,
+    onBackground = TextPrimary,
+    surface = CardLight,
+    onSurface = TextPrimary,
+    surfaceVariant = Color(0xFFE8EEF5),
+    onSurfaceVariant = TextSecondary,
+    outline = Color(0xFFC5CDD8)
 )
 
 private val DarkColors = darkColorScheme(
-    primary = Color(0xFF90CAF9),
-    secondary = Color(0xFF80CBC4),
-    tertiary = Color(0xFFA5D6A7)
+    primary = HesabdarBlueLight,
+    onPrimary = SurfaceDark,
+    primaryContainer = Color(0xFF0D47A1),
+    onPrimaryContainer = Color(0xFFBBDEFB),
+    secondary = Color(0xFF4DB6AC),
+    onSecondary = SurfaceDark,
+    tertiary = Color(0xFF81C784),
+    error = Color(0xFFEF9A9A),
+    background = SurfaceDark,
+    onBackground = TextPrimaryDark,
+    surface = CardDark,
+    onSurface = TextPrimaryDark,
+    surfaceVariant = Color(0xFF2A3038),
+    onSurfaceVariant = TextSecondaryDark,
+    outline = Color(0xFF5F6B7A)
 )
+
+private val ColorSoftPrimary = Color(0xFFE3F2FD)
 
 @Composable
 fun HesabdarTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
+    // برای هویت ثابت برند، dynamic را پیش‌فرض خاموش می‌گذاریم
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -44,6 +66,10 @@ fun HesabdarTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
+        typography = HesabdarTypography,
         content = content
     )
 }
+
+// برای import Color در Theme
+private fun Color(hex: Long) = androidx.compose.ui.graphics.Color(hex)
