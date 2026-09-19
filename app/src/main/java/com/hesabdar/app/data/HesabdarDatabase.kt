@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.hesabdar.app.data.dao.AccountDao
 import com.hesabdar.app.data.dao.AssetDao
 import com.hesabdar.app.data.dao.BudgetDao
@@ -41,26 +40,25 @@ abstract class HesabdarDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): HesabdarDatabase {
             return INSTANCE ?: synchronized(this) {
-                Room.databaseBuilder(
+                INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext,
                     HesabdarDatabase::class.java,
                     "hesabdar.db"
                 )
-                    .addCallback(object : Callback() {
-                        override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
-                            INSTANCE?.let { database ->
-                                CoroutineScope(Dispatchers.IO).launch {
-                                    seedDefaultCategories(database.categoryDao())
-                                    seedDefaultAccount(database.accountDao())
-                                }
-                            }
-                        }
-                    })
                     .fallbackToDestructiveMigration()
                     .build()
-                    .also { INSTANCE = it }
+                    .also { db ->
+                        INSTANCE = db
+                        CoroutineScope(Dispatchers.IO).launch {
+                            seedIfNeeded(db)
+                        }
+                    }
             }
+        }
+
+        private suspend fun seedIfNeeded(db: HesabdarDatabase) {
+            seedDefaultCategories(db.categoryDao())
+            seedDefaultAccount(db.accountDao())
         }
 
         private suspend fun seedDefaultCategories(dao: CategoryDao) {
@@ -81,6 +79,9 @@ abstract class HesabdarDatabase : RoomDatabase() {
         }
 
         private suspend fun seedDefaultAccount(dao: AccountDao) {
+            // فقط اگر هیچ حسابی نباشد
+            val existing = dao.getById(1)
+            if (existing != null) return
             dao.insert(
                 Account(
                     name = "نقد",
