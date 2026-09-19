@@ -8,7 +8,10 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+
+private val ColorSoftPrimary = Color(0xFFE3F2FD)
 
 private val LightColors = lightColorScheme(
     primary = HesabdarBlue,
@@ -46,12 +49,9 @@ private val DarkColors = darkColorScheme(
     outline = Color(0xFF5F6B7A)
 )
 
-private val ColorSoftPrimary = Color(0xFFE3F2FD)
-
 @Composable
 fun HesabdarTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // برای هویت ثابت برند، dynamic را پیش‌فرض خاموش می‌گذاریم
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
@@ -70,6 +70,3 @@ fun HesabdarTheme(
         content = content
     )
 }
-
-// برای import Color در Theme
-private fun Color(hex: Long) = androidx.compose.ui.graphics.Color(hex)
